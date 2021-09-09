@@ -1,0 +1,33 @@
+{
+  "name": "echomodlib",
+  "version": "1.0.3",
+  "description": "Echo VR Lib for bhaptics feedback",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NotBlue-Dev/EchoVR-Lib.git"
+  },
+  "author": "NotBlue",
+  "license": "ISC",
+  "dependencies": {
+    "arp": "0.0.3",
+    "dotenv": "^10.0.0",
+    "local-devices": "^3.1.0",
+    "node-fetch": "^2.6.1",
+    "oui": "^11.0.76",
+    "ws": "^7.5.3"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2"
+  },
+  "bugs": {
+    "url": "https://github.com/NotBlue-Dev/EchoVR-Lib/issues"
+  },
+  "homepage": "https://github.com/NotBlue-Dev/EchoVR-Lib#readme"
+}
