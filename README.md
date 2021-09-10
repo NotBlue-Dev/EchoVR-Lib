@@ -1,5 +1,5 @@
 # Echo VR Bhaptic Mod Library
- This is a library based on event emitter/receiver that you can use to sync echo arena with bhaptics products
+ This is a library based on event emiter/receiver that you can use to sync echo arena with bhaptics products
 
 ## Requirements
 
@@ -147,7 +147,7 @@ eventEmitter.on('game-ip-defined',  (args) => {
 ```
 
 **game-ip-bad-defined**
-When the ip is found (manual or scanning)
+When the ip is not found or invalid
 
 **Arguments**
 - `definedIp`
@@ -175,7 +175,7 @@ eventEmitter.on('config-save-failed',  () => {
 ```
 
 **config-save-success**
-When config saving success
+When config saving succed
 
 **Arguments**
 - `none`
@@ -214,7 +214,7 @@ eventEmitter.on('find-ip-timeout',  () => {
 ```
 
 **find-ip-failed**
-When config saving success
+When ip finder can't find ip
 
 **Arguments**
 - `err`
@@ -272,7 +272,7 @@ eventEmitter.on('data-updated',  (args) => {
 Here are all the events you can trigger
 
 **find-ip**
-Scan for ip and return event if error error, else it define game ip
+Scan for ip and return event if error is triggered, else it define game ip
 
 **Arguments**
 - `device`
@@ -297,9 +297,135 @@ Ip you want to set
 eventEmitter.emit('define-ip', "192.168.1.53")
 ```
 
+**save-config**
+Write Data to config file (config failed/success will automatically be emit after)
+
+**Arguments**
+- `none`
+
+**Examples**
+```js
+eventEmitter.emit('save-config', () => {
+    //Your code
+})
+```
+
+**change-setting**
+It need to be call on each settings change like status or intensity, this will set effect settings to api.js
+
+**Arguments**
+- `effect`
+
+Name of your effect
+
+- `status`
+
+it will enable or disable the effect (enable or disable)
+
+**Examples**
+```js
+eventEmitter.emit('change-setting', {
+        effect: names,
+        status,
+    })
+```
+
+**play-effect**
+Play effect on bhaptics products
+
+**Arguments**
+- `effect`
+
+Name of the effect you want to play
+
+**Examples**
+```js
+eventEmitter.emit('play-effect', {
+        effect: names,
+    })
+```
+
+**default-settings**
+Reset settings by default (config.json content will be replaced by default.json content)
+
+**Arguments**
+- `none`
+
+Name of the effect you want to play
+
+**Examples**
+```js
+eventEmitter.emit('default-settings', () => {
+    //Your code
+})
+```
+
+**get-settings**
+This will update the config object for api.js
+
+**Arguments**
+- `none`
+
+**Examples**
+```js
+eventEmitter.emit('get-settings', () => {
+    //Your code
+})
+```
+
+**get-data**
+This will update objects for api.js, (StatusIP, Is ip valid, status of bhaptic player, logs array)
+Required when you load your renderer (For example if you go from settings to your main, get-data need to be emit by your main)
+
+**Arguments**
+- `none`
+
+**Examples**
+```js
+eventEmitter.emit('get-data', () => {
+    //Your code
+})
+```
+
+**log**
+If you want to make a box with logs, you need to send log through this event (so the backend save them in an array)
+
+**Arguments**
+- `loggingMessage`
+
+A string of the message you want to log
+
+**Examples**
+```js
+eventEmitter.emit('log', loggingMessage)
+```
+
+**startRequest**
+The request is automatically started when ip is found and bhaptic player is running, but you can run it manually with this event
+
+**Arguments**
+- `none`
+
+**Examples**
+```js
+eventEmitter.emit('startRequest', () => {
+    //Your code
+})
+```
+
+**stopRequest**
+You can "stop" request (this will just stop interaction and effects)
+
+**Arguments**
+- `none`
+
+**Examples**
+```js
+eventEmitter.emit('stopRequest', () => {
+    //Your code
+})
+```
+
 ## License
 
 MIT
-
-
-Not finished 90% of event emiter are not in the doc
