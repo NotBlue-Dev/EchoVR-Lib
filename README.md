@@ -79,7 +79,7 @@ player.launch()
 
 Here are all the events you can listen on
 
-**tact-device-fileLoaded**
+### tact-device-fileLoaded
 When all the .tact files are loaded this event is triggered
 
 **Arguments**
@@ -92,7 +92,7 @@ eventEmitter.on('tact-device-fileLoaded',  () => {
 });
 ```
 
-## tact-device-connecting
+### tact-device-connecting
 On connecting to the bhaptics player
 
 **Arguments**
@@ -105,7 +105,7 @@ eventEmitter.on('tact-device-connecting',  () => {
 });
 ```
 
-**tact-device-connected**
+### tact-device-connected
 When the lib is connected to bhaptics player
 
 **Arguments**
@@ -118,7 +118,7 @@ eventEmitter.on('tact-device-connected',  () => {
 });
 ```
 
-**tact-device-disconnected**
+### tact-device-disconnected
 When the lib is disconnected from bhaptics player
 
 **Arguments**
@@ -131,7 +131,7 @@ eventEmitter.on('tact-device-disconnected',  (args) => {
 });
 ```
 
-**game-ip-defined**
+### game-ip-defined
 When the ip is found (manual or scanning)
 
 **Arguments**
@@ -146,7 +146,7 @@ eventEmitter.on('game-ip-defined',  (args) => {
 });
 ```
 
-**game-ip-bad-defined**
+### game-ip-bad-defined
 When the ip is not found or invalid
 
 **Arguments**
@@ -161,7 +161,7 @@ eventEmitter.on('game-ip-bad-defined',  (args) => {
 });
 ```
 
-**config-save-failed**
+### config-save-failed
 When config saving fail
 
 **Arguments**
@@ -174,7 +174,7 @@ eventEmitter.on('config-save-failed',  () => {
 });
 ```
 
-**config-save-success**
+### config-save-success
 When config saving succed
 
 **Arguments**
@@ -187,7 +187,7 @@ eventEmitter.on('config-save-success',  () => {
 });
 ```
 
-**find-ip-canceled**
+### find-ip-canceled
 When ip finder is canceled by user
 
 **Arguments**
@@ -200,7 +200,7 @@ eventEmitter.on('find-ip-canceled',  () => {
 });
 ```
 
-**find-ip-timeout**
+### find-ip-timeout
 When ip finder is resolve promise with timeout (no ip found)
 
 **Arguments**
@@ -213,7 +213,7 @@ eventEmitter.on('find-ip-timeout',  () => {
 });
 ```
 
-**find-ip-failed**
+### find-ip-failed
 When ip finder can't find ip
 
 **Arguments**
@@ -228,7 +228,7 @@ eventEmitter.on('find-ip-failed',  (args) => {
 });
 ```
 
-**settings-updated**
+### settings-updated
 Update of intensity or if disable/enable (Triggered by event emiter get-settings)
 
 **Arguments**
@@ -243,7 +243,7 @@ eventEmitter.on('settings-updated',  (args) => {
 });
 ```
 
-**data-updated**
+### data-updated
 Triggered by event emiter get-data
 
 **Arguments**
@@ -271,7 +271,7 @@ eventEmitter.on('data-updated',  (args) => {
 
 Here are all the events you can trigger
 
-**find-ip**
+### find-ip
 Scan for ip and return event if error is triggered, else it define game ip
 
 **Arguments**
@@ -284,7 +284,7 @@ Device type `Quest` or `PC`
 eventEmitter.emit('find-ip', "Quest")
 ```
 
-**define-ip**
+### define-ip
 Manually define ip (automatically triggered if ip is found by find-ip)
 
 **Arguments**
@@ -297,7 +297,7 @@ Ip you want to set
 eventEmitter.emit('define-ip', "192.168.1.53")
 ```
 
-**save-config**
+### save-config
 Write Data to config file (config failed/success will automatically be emit after)
 
 **Arguments**
@@ -310,7 +310,7 @@ eventEmitter.emit('save-config', () => {
 })
 ```
 
-**change-setting**
+### change-setting
 It need to be call on each settings change like status or intensity, this will set effect settings to api.js
 
 **Arguments**
@@ -330,7 +330,7 @@ eventEmitter.emit('change-setting', {
     })
 ```
 
-**play-effect**
+### play-effect
 Play effect on bhaptics products
 
 **Arguments**
@@ -345,7 +345,7 @@ eventEmitter.emit('play-effect', {
     })
 ```
 
-**default-settings**
+### default-settings
 Reset settings by default (config.json content will be replaced by default.json content)
 
 **Arguments**
@@ -360,7 +360,7 @@ eventEmitter.emit('default-settings', () => {
 })
 ```
 
-**get-settings**
+### get-settings
 This will update the config object for api.js
 
 **Arguments**
@@ -373,7 +373,7 @@ eventEmitter.emit('get-settings', () => {
 })
 ```
 
-**get-data**
+### get-data
 This will update objects for api.js, (StatusIP, Is ip valid, status of bhaptic player, logs array)
 Required when you load your renderer (For example if you go from settings to your main, get-data need to be emit by your main)
 
@@ -387,7 +387,7 @@ eventEmitter.emit('get-data', () => {
 })
 ```
 
-**log**
+### log
 If you want to make a box with logs, you need to send log through this event (so the backend save them in an array)
 
 **Arguments**
@@ -400,7 +400,7 @@ A string of the message you want to log
 eventEmitter.emit('log', loggingMessage)
 ```
 
-**startRequest**
+### startRequest
 The request is automatically started when ip is found and bhaptic player is running, but you can run it manually with this event
 
 **Arguments**
@@ -413,7 +413,7 @@ eventEmitter.emit('startRequest', () => {
 })
 ```
 
-**stopRequest**
+### stopRequest
 You can "stop" request (this will just stop interaction and effects)
 
 **Arguments**
