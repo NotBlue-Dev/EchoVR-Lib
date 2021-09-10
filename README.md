@@ -351,8 +351,6 @@ Reset settings by default (config.json content will be replaced by default.json 
 **Arguments**
 - `none`
 
-Name of the effect you want to play
-
 **Examples**
 ```js
 eventEmitter.emit('default-settings', () => {
