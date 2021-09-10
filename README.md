@@ -92,7 +92,7 @@ eventEmitter.on('tact-device-fileLoaded',  () => {
 });
 ```
 
-**tact-device-connecting**
+## tact-device-connecting
 On connecting to the bhaptics player
 
 **Arguments**
