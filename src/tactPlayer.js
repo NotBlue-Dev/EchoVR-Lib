@@ -10,6 +10,7 @@ class TactPlayer {
         this.gameIpState = false
         this.hapticsConnectionState = false
         this.logs = []
+        this.effectOther = ["stunnedHead","grabHand","wallHead","stunHand","shieldHead","shieldHand"]
         this.api = new api(this.tact.playEffect, this.configLoader.load())
         this.initializeListeners()
     }
@@ -115,9 +116,20 @@ class TactPlayer {
     updateSetting(arg) {
         const { effect } = arg
 
-        const intensity = arg.intensity || this.api.config.effects[effect].intensity
+        let intensity;
 
-        let enable = this.api.config.effects[effect].enable
+        let enable;
+
+        let other = this.effectOther.includes(effect)
+
+        if(other) {
+            intensity = arg.intensity || this.api.config.effects.other[effect].intensity
+            enable = this.api.config.effects.other[effect].enable
+        } else {
+            intensity = arg.intensity || this.api.config.effects.global[effect].intensity
+            enable = this.api.config.effects.global[effect].enable
+        }
+
         if (false === arg.enable || true === arg.enable) {
             enable = arg.enable
         }
@@ -125,10 +137,7 @@ class TactPlayer {
         let val = parseFloat(intensity)
         val = Math.max(0.2, val)
         val = Math.min(5.0, val)
-        this.api.setEffectSetting(effect, {
-            intensity: val,
-            enable
-        })
+        this.api.setEffectSetting(effect, {intensity: val, enable}, other)
     }
 
     setDefaultSettings() {
@@ -138,12 +147,26 @@ class TactPlayer {
     }
 
     getSettings() {
-        this.sendEvent('settings-updated', this.api.config.effects)
+        let temp = {
+            ...this.api.config.effects.global,
+            ...this.api.config.effects.other
+        }
+        this.sendEvent('settings-updated', temp)
     }
     
     playEffect(arg) {
         const names  = arg.effect
-        this.tact.playEffect(names, this.api.config.effects[names])
+
+        let other = this.effectOther.includes(names)
+
+        let effect;
+
+        if(other) {
+            effect = this.api.config.effects.other[names]
+        } else {
+            effect = this.api.config.effects.global[names]
+        }
+        this.tact.playEffect(names, effect)
     }
 
     getData() {

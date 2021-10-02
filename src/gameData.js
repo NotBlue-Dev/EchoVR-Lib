@@ -25,7 +25,7 @@ class GameData {
         this.bluepoints = json.blue_points;
         this.status = json.game_status;
         this.clockDisplay = json.game_clock_display;
-
+        
         this.playerTeam = json.teams[this.playerTeamIndex]
         this.player = this.playerTeam.players[this.playerIndex]
         this.playerId = this.player.playerid;
@@ -33,6 +33,12 @@ class GameData {
         this.enemyTeamPlayers = json.teams[Math.abs(this.playerTeamIndex - 1)].players
 
         this.matchType = json.match_type
+
+        this.triggerLeft = json.left_shoulder_pressed2
+        this.triggerRight = json.right_shoulder_pressed2 
+        this.grabLeft = json.left_shoulder_pressed
+        this.grabRight = json.right_shoulder_pressed2
+        
     }
 
     isInMatch() {
@@ -41,6 +47,24 @@ class GameData {
 
     isPlaying() {
         return this.status === 'playing'
+    }
+
+    isPlayerGrabbingPlusHand() {
+        console.log(this.grabLeft, this.grabRight)
+        if(this.player.holding_left === 'disc' && this.grabLeft >= 1) {
+            return 'Left'
+        } else if(this.player.holding_right === 'disc' && this.grabRight >= 1) {
+            return 'Right'
+        }
+        else if(this.player.holding_left !== 'none' && this.player.holding_right !== 'none') {
+            return ''
+        } else if(this.player.holding_right !== 'none') {
+            return 'Right'
+        } else if(this.player.holding_left !== 'none') {
+            return 'Left'
+        } else {
+            return false
+        }
     }
 
     isPlayerGrabbingSomething() {

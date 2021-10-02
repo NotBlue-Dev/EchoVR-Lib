@@ -1,5 +1,5 @@
 class Goal {
-    constructor(tactPlay, options) {
+    constructor(tactPlay, options, otherOptions) {
         this.tactPlay = tactPlay
         this.options = options
 
@@ -15,6 +15,7 @@ class Goal {
         }
         if (this.orangePoints != gameData.orangepoints || this.bluePoints != gameData.bluepoints) {
             this.tactPlay('goal', this.options);
+            
             this.bluePoints = gameData.bluepoints
             this.orangePoints = gameData.orangepoints
         }

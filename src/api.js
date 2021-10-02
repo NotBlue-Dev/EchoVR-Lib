@@ -8,6 +8,7 @@ const Stun = require("./effects/stun");
 const GameData = require("./gameData");
 const Wall = require("./effects/wall");
 const Boost = require("./effects/boost");
+const Power = require("./effects/power");
 
 class Api {
     constructor(tactPlay, config) {
@@ -28,30 +29,52 @@ class Api {
             shield: Shield,
             stun: Stun,
             boost: Boost,
-            wall: Wall
+            wall: Wall,
+            powerHand: Power,
         }
 
-        for (const [name, effect] of Object.entries(this.config.effects)) {
-            effect.enable && this.effects.push(new (effectClass[name])(this.tactPlay, {
+        const otherClass = {
+            heart: undefined,
+            stunned: [this.config.effects.other.stunnedHead],
+            grab: [this.config.effects.other.grabHand],
+            goal: undefined,
+            shield: [this.config.effects.other.shieldHand,this.config.effects.other.shieldHead],
+            stun: [this.config.effects.other.stunHand],
+            boost: undefined,
+            wall: [this.config.effects.other.wallHead],
+        }
+
+        for (const [name, effect] of Object.entries(this.config.effects.global)) {
+            effect.enable && this.effects.push(
+                new (effectClass[name])
+                (this.tactPlay, {
                 intensity: effect.intensity,
                 duration: effect.duration
-            }))
+                }, otherClass[name])
+            )
+
         }
     }
 
     setEffectsSetting(settings) {
         this.config.effects = settings
-
         this.initializeEffects()
     }
 
-    setEffectSetting(name, options) {
-        this.config.effects[name] = {
-            ...this.config.effects[name],
-            ...options
+    setEffectSetting(name, options, other) {
+        if(!other) {
+            this.config.effects.global[name] = {
+                ...this.config.effects.global[name],
+                ...options
+            }
+    
+            this.initializeEffects()
+        } else {
+            this.config.effects.other[name] = {
+                ...this.config.effects.other[name],
+                ...options
+            }
         }
-
-        this.initializeEffects()
     }
 
     setPlayerIp(ip) {

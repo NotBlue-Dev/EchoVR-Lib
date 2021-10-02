@@ -1,5 +1,5 @@
 class Boost {
-    constructor(tactPlay, options) {
+    constructor(tactPlay, options, otherOptions) {
         this.tactPlay = tactPlay
         this.options = options
 
