@@ -1,6 +1,6 @@
 {
   "name": "echomodlib",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Echo VR Lib for bhaptics feedback",
   "main": "index.js",
   "scripts": {
