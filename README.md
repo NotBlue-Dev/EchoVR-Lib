@@ -9,7 +9,7 @@
 ## Supported Platforms
 
 - Windows
-- Linux (with a mock of ipfinder)
+- Linux (using ipfinder mock)
 
 ## Install
 
