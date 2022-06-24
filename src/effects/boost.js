@@ -53,9 +53,8 @@ class Boost {
             + ((headVelocityDiff[2] - velocityDiff[2]) ** 2)
 
         if (boostingError < this.error) {
-            console.log('boost')
+            if(!this.boosting) this.tactPlay('boost', this.options)
             this.boosting = true
-            this.tactPlay('boost', this.options)
             setTimeout(() => {
                 this.boosting = false
             }, this.boostTime)
