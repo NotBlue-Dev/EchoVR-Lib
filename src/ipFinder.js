@@ -41,7 +41,7 @@ class IpFinder {
                 }
                 try {
                     let a = oui(mac)
-                    if (a.split(' ')[0] === 'Oculus') {
+                    if (a.split(' ')[0] === 'Oculus' || a.split(' ')[0] === 'Facebook') {
                         resolve()
                     }
                 } catch {
